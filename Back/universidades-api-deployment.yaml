@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: universidades-api
+  name: universidades-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: universidades-api
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: universidades-api
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: contraseña
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://universidades-db:5432/Universidad
+            - name: SPRING_DATASOURCE_USERNAME
+              value: usuario1
+          image: johnnys567/universidades-api:1.0
+          name: universidades-api
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always

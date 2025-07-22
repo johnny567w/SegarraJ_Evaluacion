@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: universidades-db
+  name: universidades-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: universidades-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: universidades-db
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: Universidad
+            - name: POSTGRES_PASSWORD
+              value: contraseña
+            - name: POSTGRES_USER
+              value: usuario1
+          image: postgres:13
+          name: universidad
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+      restartPolicy: Always
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: pgdata
