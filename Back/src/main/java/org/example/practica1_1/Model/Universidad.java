@@ -1,10 +1,8 @@
 package org.example.practica1_1.Model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "universidad")
 public class Universidad {
 
     @Id

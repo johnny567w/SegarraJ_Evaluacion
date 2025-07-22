@@ -29,6 +29,7 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: usuario1
           image: johnnys567/universidades-api:1.0
+          imagePullPolicy: Always
           name: universidades-api
           ports:
             - containerPort: 8080
