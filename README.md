@@ -1,1 +1,3 @@
-Para iniciar el proyecto en primer lugar empece construyendo el back, se pide que exista una unica tabla de universidades,
+Pasos para el uso, en primer lugar se debe hacer una copia de este github
+git clone 
+Debemos 
