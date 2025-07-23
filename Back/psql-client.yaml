@@ -1,0 +1,10 @@
+# psql-client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: psql-client
+spec:
+  containers:
+    - name: psql
+      image: postgres:13
+      command: ["sleep", "infinity"]

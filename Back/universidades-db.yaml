@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgdata
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,7 +32,6 @@ spec:
           image: postgres:13
           ports:
             - containerPort: 5432
-              protocol: TCP
           env:
             - name: POSTGRES_DB
               value: Universidad
@@ -41,3 +51,15 @@ spec:
         - name: init-sql-volume
           configMap:
             name: initdb-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: universidades-db
+spec:
+  selector:
+    app: universidades-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

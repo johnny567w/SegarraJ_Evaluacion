@@ -29,6 +29,10 @@ public class UniversidadController {
                 return ResponseEntity.ok(repo.save(existente));
             }).orElse(ResponseEntity.notFound().build());
         }
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
 
         @DeleteMapping("/{id}")
         public void eliminar(@PathVariable Long id) { repo.deleteById(id); }
